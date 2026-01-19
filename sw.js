@@ -1,5 +1,5 @@
 // Development mode - set to true during development, false for production
-const DEV_MODE = true;
+const DEV_MODE = false;
 
 const CACHE_NAME = `octodial-v${Date.now()}`;
 const urlsToCache = [

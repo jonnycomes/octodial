@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Octodial - Octonion Multiplication Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2196F3">
+</head>
+<body>
+    <div class="app">
+        <div class="rotary-container">
+            <div class="octonion-circles">
+                <div class="circle" data-unit="i0">0</div>
+                <div class="circle" data-unit="i1">1</div>
+                <div class="circle" data-unit="i2">2</div>
+                <div class="circle" data-unit="i3">3</div>
+                <div class="circle" data-unit="i4">4</div>
+                <div class="circle" data-unit="i5">5</div>
+                <div class="circle" data-unit="i6">6</div>
+            </div>
+            <div class="center-formula">
+                <div class="brand-name">OCTODIAL</div>
+                <span id="current-multiplication"></span>
+            </div>
+            <div class="rotary-mask" role="slider" aria-label="Rotary dial for octonion multiplication" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0">
+                <svg viewBox="0 0 100 100" class="rotary-washer">
+                    <defs>
+                        <mask id="washer-holes">
+                            <!-- White background makes everything visible -->
+                            <rect width="100" height="100" fill="white"/>
+                            <!-- Black circles create holes (transparent areas) -->
+                            <!-- Center hole - like real rotary phone -->
+                            <!-- Radius 25: gives equal 10-unit spacing from rim holes to both edges -->
+                            <circle cx="50" cy="50" r="25" fill="black"/>
+                            <!-- Three holes in rim for multiplication nodes -->
+                            <!-- Using radius=35 (35% of 100) to match CSS --radius: 35% -->
+                            <!-- i₀: 0° - top: x=50+35*sin(0°), y=50-35*cos(0°) -->
+                            <circle cx="50" cy="15" r="9" fill="black"/>
+                            <!-- i₁: 51.43°: x=50+35*sin(51.43°), y=50-35*cos(51.43°) -->
+                            <circle cx="77.4" cy="28.1" r="9" fill="black"/>
+                            <!-- i₃: 154.29°: x=50+35*sin(154.29°), y=50-35*cos(154.29°) -->
+                            <circle cx="65.1" cy="81.5" r="9" fill="black"/>
+                        </mask>
+                        
+                        <radialGradient id="metalGrad">
+                            <stop offset="0%" stop-color="white" stop-opacity="0.2"/>
+                            <stop offset="70%" stop-color="white" stop-opacity="0"/>
+                        </radialGradient>
+                    </defs>
+                    
+                    <!-- The washer disc with holes cut out -->
+                    <circle cx="50" cy="50" r="45" fill="#2a2a2a" fill-opacity="0.85" mask="url(#washer-holes)" stroke="#444" stroke-width="0.5"/>
+                    
+                    <!-- Metallic highlights -->
+                    <circle cx="50" cy="50" r="45" fill="url(#metalGrad)" mask="url(#washer-holes)" opacity="0.2"/>
+                </svg>
+            </div>
+        </div>
+        <div class="instructions">
+            <p>Drag the rotary wheel and click the visible numbers to explore octonion multiplication.</p>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

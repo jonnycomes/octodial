@@ -1,0 +1,31 @@
+{
+  "name": "octodial",
+  "version": "1.0.0",
+  "description": "Interactive octonion multiplication visualizer with a vintage rotary phone interface",
+  "main": "app.js",
+  "scripts": {
+    "start": "lite-server",
+    "build": "echo 'Build step not defined'",
+    "test": "echo 'Test step not defined'"
+  },
+  "keywords": [
+    "octonions",
+    "mathematics",
+    "visualization",
+    "rotary-phone",
+    "PWA",
+    "interactive",
+    "algebra"
+  ],
+  "author": "Jonny Comes",
+  "license": "MIT",
+  "dependencies": {
+    "lite-server": "^2.6.1"
+  },
+  "devDependencies": {},
+  "homepage": "https://jonnycomes.github.io/octodial",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonnycomes/octodial.git"
+  }
+}

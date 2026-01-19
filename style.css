@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Computer+Modern&family=Bebas+Neue&family=Latin+Modern+Math&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Computer Modern', 'Latin Modern Math', 'Computer Modern Serif', serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.app {
+    text-align: center;
+    color: #e0e0e0;
+    max-width: 600px;
+}
+
+.rotary-container {
+    position: relative;
+    width: min(80vw, 80vh, 400px);
+    height: min(80vw, 80vh, 400px);
+    margin: 0 auto 40px;
+    background: radial-gradient(circle, #3a3a3a 0%, #1a1a1a 100%);
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 0 30px rgba(0,0,0,0.8),
+        0 10px 30px rgba(0,0,0,0.5);
+    
+    /* CSS Custom Properties for responsive sizing */
+    --container-size: min(80vw, 80vh, 400px);
+    --radius: calc(var(--container-size) * 0.35);
+    --circle-size: calc(var(--container-size) * 0.15);
+    --center: calc(50% - var(--circle-size) / 2);
+}
+
+.octonion-circles {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.circle {
+    position: absolute;
+    width: var(--circle-size);
+    height: var(--circle-size);
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f0f0f0 0%, #d0d0d0 100%);
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: calc(var(--container-size) * 0.05);
+    font-family: 'Computer Modern', 'Latin Modern Math', 'Computer Modern Serif', serif;
+    border: 2px solid #999;
+    box-shadow: 
+        0 3px 10px rgba(0,0,0,0.4),
+        inset 0 1px 3px rgba(255,255,255,0.3);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Perfect heptagon using explicit coordinates */
+.circle:nth-child(1) { 
+    left: calc(50% - var(--circle-size) / 2);
+    top: calc(50% - var(--radius) - var(--circle-size) / 2);
+}
+.circle:nth-child(2) { 
+    left: calc(50% + var(--radius) * 0.7818 - var(--circle-size) / 2);
+    top: calc(50% - var(--radius) * 0.6235 - var(--circle-size) / 2);
+}
+.circle:nth-child(3) { 
+    left: calc(50% + var(--radius) * 0.9749 - var(--circle-size) / 2);
+    top: calc(50% + var(--radius) * 0.2225 - var(--circle-size) / 2);
+}
+.circle:nth-child(4) { 
+    left: calc(50% + var(--radius) * 0.4339 - var(--circle-size) / 2);
+    top: calc(50% + var(--radius) * 0.9010 - var(--circle-size) / 2);
+}
+.circle:nth-child(5) { 
+    left: calc(50% - var(--radius) * 0.4339 - var(--circle-size) / 2);
+    top: calc(50% + var(--radius) * 0.9010 - var(--circle-size) / 2);
+}
+.circle:nth-child(6) { 
+    left: calc(50% - var(--radius) * 0.9749 - var(--circle-size) / 2);
+    top: calc(50% + var(--radius) * 0.2225 - var(--circle-size) / 2);
+}
+.circle:nth-child(7) { 
+    left: calc(50% - var(--radius) * 0.7818 - var(--circle-size) / 2);
+    top: calc(50% - var(--radius) * 0.6235 - var(--circle-size) / 2);
+}
+
+.circle:hover {
+    transform: scale(1.1);
+    box-shadow: 
+        0 4px 15px rgba(0,0,0,0.5),
+        inset 0 2px 5px rgba(255,255,255,0.4);
+}
+
+.circle:active {
+    transform: scale(0.95);
+}
+
+.rotary-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: all; /* Enable dragging */
+    cursor: grab;
+    z-index: 10;
+    outline: none; /* Remove focus outline completely */
+}
+
+.rotary-mask:active,
+.rotary-mask.dragging {
+    cursor: grabbing;
+}
+
+.rotary-mask:hover .rotary-washer {
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.5)) brightness(1.05);
+}
+
+.rotary-mask:active .rotary-washer,
+.rotary-mask.dragging .rotary-washer {
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6)) brightness(1.1);
+}
+
+.rotary-washer {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+    pointer-events: none; /* Let visible nodes be clickable */
+}
+
+.rotary-washer circle {
+    pointer-events: all; /* Enable dragging on the washer circles */
+}
+
+
+
+
+
+
+
+.center-formula {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    pointer-events: none;
+    height: calc(var(--container-size) * 0.12); /* Fixed height for container */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#current-multiplication {
+    font-size: calc(var(--container-size) * 0.06);
+    font-weight: 400;
+    font-family: 'Latin Modern Math', 'Computer Modern', 'Times New Roman', serif;
+    font-style: italic;
+    color: #f0f0f0;
+    letter-spacing: 0.5px;
+    text-align: center;
+    display: block;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    transition: opacity 0.2s ease-in-out;
+    flex-shrink: 0; /* Don't let it shrink */
+    height: calc(var(--container-size) * 0.06); /* Fixed height */
+}
+
+/* Container for stacked sub/superscript */
+.sub-super {
+    position: relative;
+    display: inline-block;
+    vertical-align: baseline;
+    width: 1ch; /* Give it some width for positioning */
+}
+
+/* Subscript positioning */
+.subscript {
+    position: absolute;
+    font-size: 0.7em;
+    bottom: -0.6em;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Superscript positioning - directly above subscript */
+.superscript {
+    position: absolute;
+    font-size: 0.7em;
+    top: -1.6em;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.brand-name {
+    font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+    font-size: calc(var(--container-size) * 0.045);
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #d0d0d0;
+    text-align: center;
+    margin-bottom: 4px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+    opacity: 0.8;
+    flex-shrink: 0; /* Don't let it shrink */
+}
+
+.instructions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.instructions p {
+    font-size: 14px;
+    color: #999;
+    font-style: italic;
+    opacity: 0.7;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.4;
+}
